@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "Launch localhost with sourcemaps",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3100",
+      "webRoot": "${workspaceRoot}",
+      "sourceMaps": true,
+      "diagnosticLogging": false,
+      "userDataDir": "${workspaceRoot}/out/chrome",
+      "preLaunchTask": ""
+    },
+    {
+      "name": "Launch index.html (without sourcemaps)",
+      "type": "chrome",
+      "request": "launch",
+      "file": "${workspaceRoot}"
+    }
+  ]
+}
