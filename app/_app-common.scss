@@ -1,0 +1,23 @@
+@import '~nativescript-theme-core/scss/light';
+@import '~nativescript-theme-core/scss/index';
+
+$googleColor: #db4437;
+$facebookColor: #4267b2;
+
+.login {
+  margin: 0;
+  &.google {
+    background-color: $googleColor;
+    color: white;
+  }
+  &.facebook {
+    background-color: $facebookColor;
+    color: white;
+  }
+}
+
+.page {
+  background-color: #ccc;
+}
+
+

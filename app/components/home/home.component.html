@@ -1,0 +1,41 @@
+<ActionBar title="">
+
+  <StackLayout orientation="horizontal" >
+    <Image src="res://nativescript_logo" class="action-image"></Image>
+    <Label text="ativeScript"  class="action-label"></Label>
+  </StackLayout>
+  <!-- <ActionItem text="Search" (tap)="openSearch()" android:horizontalAlignment="center" ios.position="left"></ActionItem>
+  <ActionItem text="ss" (tap)="openSearch()" android:horizontalAlignment="right" ios.position="right"></ActionItem> -->
+
+</ActionBar>
+<StackLayout orientation="vertical" class="p-10">
+  
+  <StackLayout orientation="vertical">
+    <Label  class="h3" text="My Fridge"></Label>
+    <ListView [items]="myProducts" >
+      <ng-template  let-item="item">
+        <igt-product [product]="item"></igt-product>
+      </ng-template>
+    </ListView>
+
+    <!-- <ScrollView orientation="horizontal">
+        <ng-template ngFor let-product [ngForOf]="myProducts">
+      <igt-product [product]="product"></igt-product>
+        </ng-template>
+    </ScrollView> -->
+
+
+  </StackLayout>
+
+  <!-- <StackLayout orientation="vertical">
+    <Label  class="h3" text="My Recipes"></Label>
+    <RadListView [items]="myProducts">
+      <ng-template tkListItemTemplate let-product="item">
+          <StackLayout orientation="verical">
+              <Label class="nameLabel" [text]="product.name"></Label>
+              <Label class="descriptionLabel" [text]="product.description"></Label>
+          </StackLayout>
+      </ng-template>
+    </RadListView>
+  </StackLayout> -->
+</StackLayout>

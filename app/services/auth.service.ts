@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_URL } from '../constants';
 import { Observable } from 'rxjs/Observable';
+import * as ApplicationSettings from 'application-settings';
+import * as Facebook from 'nativescript-facebook';
+
+import { API_URL, AUTHORIZATION_KEY } from '../constants';
 
 
 @Injectable()
@@ -12,19 +16,28 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   public login(username: string, password: string): Observable<any> {
-    return this.httpClient.post(`${API_URL}/login`, {username, password }, {observe: 'response'}).do(res => {
+    return this.httpClient.post(`${API_URL}/login`, {username, password }, {observe: 'response'}).do((res) => {
       const authorization = res.headers.get('Authorization');
-      sessionStorage.setItem('authorization', authorization);
+      ApplicationSettings.setString(AUTHORIZATION_KEY, authorization);
       this.user = res.body;
     });
   }
 
+  public loadUser(): Promise<any> {
+
+    return this.getUser().catch((err) => {
+      return Observable.of({});
+    }).toPromise();
+  }
+
   public getUser(): Observable<any> {
-    return this.httpClient.get(`${API_URL}/api/user/me`);
+    return this.httpClient.get(`${API_URL}/api/user/me`).do((user) => {
+      this.user = user;
+    });
   }
 
   public isLoggedId(): boolean {
-    const token = sessionStorage.getItem('authorization');
+    const token = ApplicationSettings.getString('authorization');
     if (token) {
       return true;
     }
@@ -46,8 +59,37 @@ export class AuthService {
   public logout(): Observable<any> {
     return this.httpClient.get(`${API_URL}/api/user/logout`).do((res: boolean) => {
       if (res) {
-        sessionStorage.clear(); // ;setItem('authorization', authorization);
+        ApplicationSettings.clear(); // ;setItem('authorization', authorization);
       }
     });
   }
+
+  public gmailLogin() {
+    // this.router.navigate(['/secure']);
+
+    // tnsOAuthModule.login('/secure').
+    console.log('gmailLogin');
+  }
+
+  onLogin(eventData: Facebook.LoginEventData) {
+    if (eventData.error) {
+        alert('Error during login: ' + eventData.error);
+    } else {
+      ApplicationSettings.setString('access_token', eventData.loginResponse.token);
+        // this.navigationService.go(['home']);
+    }
+}
+
+facebookLogin() {
+    Facebook.login((error, fbData) => {
+        if (error) {
+            console.log(error);
+            alert('Error during login: ' + error.message);
+        } else {
+          console.log(fbData);
+          ApplicationSettings.setString('access_token', fbData.token);
+        }
+    });
+}
+
 }

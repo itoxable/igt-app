@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Page } from 'tns-core-modules/ui/page';
 
 @Component({
   selector: 'igt-logged-out-layout',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoggedOutLayoutComponent implements OnInit {
-  constructor() { }
+
+  constructor(page: Page) {
+    page.actionBarHidden = true;
+  }
 
   ngOnInit() { }
 }

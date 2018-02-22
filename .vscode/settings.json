@@ -1,12 +1,12 @@
 {
   "files.exclude": {
-    "node_modules/": true,
+    "node_modules/": false,
     "compiled/": false,
     "dist/": false,
     "npm-debug.log": true
   },
   "search.exclude": {
-    "node_modules/": true,
+    "node_modules/": false,
     "compiled/": true,
     "dist/": true,
     "dll/": true,

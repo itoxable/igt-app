@@ -1,0 +1,11 @@
+<FlexboxLayout  class="p-10" flexDirection="column" alignContents="center" verticalAlignment="center">
+  <Label class="h1 m-b-10" text="Login to Scoopa"></Label>
+  <Label class="h4 m-b-30" text="Login with: "></Label>
+  <StackLayout class="m-t-30">
+    <Button text="Google" (tap)="gmail()" class="btn btn-primary login google "></Button>
+    <Button text="Facebook" (tap)="facebook()" class="btn btn-primary login facebook"></Button>
+    <Button text="Email" (tap)="email()" class="btn btn-primary login instagram"></Button>
+    <FacebookLoginButton (login)="onLogin($event)"></FacebookLoginButton>
+  </StackLayout>
+  
+</FlexboxLayout >

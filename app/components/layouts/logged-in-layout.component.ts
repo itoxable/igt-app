@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
+import { Page } from 'tns-core-modules/ui/page';
 
 @Component({
   selector: 'igt-logged-in-layout',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoggedInLayoutComponent implements OnInit {
-  constructor() { }
+
+  constructor(page: Page, private modalService: ModalDialogService ) {
+    page.actionBarHidden = false;
+  }
 
   ngOnInit() { }
+
+
 }

@@ -1,0 +1,19 @@
+<FlexboxLayout  class="p-10" flexDirection="column" alignContents="center" verticalAlignment="center">
+  <!-- <Label text="Email"></Label> -->
+  <TextField required hint="Email here" [(ngModel)]="email" #element></TextField>
+  <!-- <Label [text]="Password"></Label> -->
+  <TextField required hint="Enter your passwordf."  [(ngModel)]="password" [text]="password" secure="true"></TextField>
+
+  <Button text="Login" (tap)="login()" class="btn btn-primary login"></Button>
+
+  <Label *ngIf="errorMessage" class="c-ruby text-center" [text]="errorMessage"></Label>
+
+</FlexboxLayout>
+
+<!-- <FlexboxLayout  class="p-10" flexDirection="column" alignContents="center" verticalAlignment="center">
+    <Label [text]="email"></Label>
+    <TextField required hint="Email here" keyboardType="email" [text]="email"></TextField>
+    <Label [text]="password"></Label>
+    <TextField required hint="Enter your password."  [text]="password" secure="true"></TextField>
+    <Button text="Login" (tap)="login()" class="btn btn-primary login"></Button>
+  </FlexboxLayout> -->
