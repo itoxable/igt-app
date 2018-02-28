@@ -1,5 +1,7 @@
 import './rxjs-extensions';
-import { NgModule, NO_ERRORS_SCHEMA, APP_INITIALIZER } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, APP_INITIALIZER, NgModuleFactoryLoader  } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -8,6 +10,7 @@ import { AppComponent } from './app.component';
 import * as ApplicationSettings from 'application-settings';
 import * as nsFacebook from 'nativescript-facebook';
 import * as application from 'tns-core-modules/application';
+import { BarcodeScanner } from 'nativescript-barcodescanner';
 
 import { ItemService } from './item/item.service';
 import { ItemsComponent } from './item/items.component';
@@ -18,7 +21,7 @@ import { LoggedOutLayoutComponent } from './components/layouts/logged-out-layout
 import { IsLoggedInGuard } from './services/is-logged-in.guard';
 import { IsLoggedOutGuard } from './services/is-logged-out.guard';
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NativeScriptRouterModule, NSModuleFactoryLoader } from 'nativescript-angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { EmailLoginComponent } from './components/login/email-login/email-login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -33,9 +36,17 @@ import { RecipeFilterComponent } from './components/recipe-filter/recipe-filter.
 import { ProductComponent } from './components/product/product.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { UserService } from './services/user.service';
+import { NativeScriptUIListViewModule } from 'nativescript-pro-ui/listview/angular';
+import { RecipeService } from './services/recipe.service';
+// import { CommonDirectivesModule } from './navigation/directives/common-directives.module';
+
+// import { TNSFrescoModule } from 'nativescript-fresco/angular';
+// import * as frescoModule from 'nativescript-fresco';
+import { ProductService } from './services/product.service';
+import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
 
 application.on(application.launchEvent, function (args) {
-//   nsFacebook.init('2074423572770618');
+  nsFacebook.init('2074423572770618');
 });
 
 @NgModule({
@@ -43,9 +54,13 @@ application.on(application.launchEvent, function (args) {
         AppComponent
     ],
     imports: [
+      CommonModule,
+      // CommonDirectivesModule,
+      // TNSFrescoModule,
       NativeScriptModule,
       NativeScriptRouterModule,
       NativeScriptFormsModule,
+      NativeScriptUIListViewModule,
       AppRoutingModule,
       HttpClientModule
     ],
@@ -62,7 +77,8 @@ application.on(application.launchEvent, function (args) {
       ProfileComponent,
       RecipeFilterComponent,
       RecipeComponent,
-      ProductComponent
+      ProductComponent,
+      BarcodeScannerComponent
     ],
     providers: [
       { provide: APP_INITIALIZER, useFactory: initializer, deps: [AuthService], multi: true },
@@ -72,6 +88,10 @@ application.on(application.launchEvent, function (args) {
       IsLoggedInGuard,
       IsLoggedOutGuard,
       UserService,
+      RecipeService,
+      ProductService,
+      BarcodeScanner,
+      { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader },
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,

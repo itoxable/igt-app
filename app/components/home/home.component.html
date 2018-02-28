@@ -1,41 +1,50 @@
 <ActionBar title="">
+    <ActionItem (tap)="openSearch()"
+    ios.systemIcon="9" ios.position="right"
+    android.systemIcon="ic_menu_agenda" android.position="actionBar"></ActionItem>
 
-  <StackLayout orientation="horizontal" >
-    <Image src="res://nativescript_logo" class="action-image"></Image>
-    <Label text="ativeScript"  class="action-label"></Label>
-  </StackLayout>
-  <!-- <ActionItem text="Search" (tap)="openSearch()" android:horizontalAlignment="center" ios.position="left"></ActionItem>
-  <ActionItem text="ss" (tap)="openSearch()" android:horizontalAlignment="right" ios.position="right"></ActionItem> -->
-
+    <ActionItem (tap)="openSearch()"
+    ios.systemIcon="9" ios.position="right"
+    android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
 </ActionBar>
-<StackLayout orientation="vertical" class="p-10">
-  
-  <StackLayout orientation="vertical">
-    <Label  class="h3" text="My Fridge"></Label>
-    <ListView [items]="myProducts" >
-      <ng-template  let-item="item">
-        <igt-product [product]="item"></igt-product>
-      </ng-template>
-    </ListView>
 
-    <!-- <ScrollView orientation="horizontal">
-        <ng-template ngFor let-product [ngForOf]="myProducts">
-      <igt-product [product]="product"></igt-product>
-        </ng-template>
-    </ScrollView> -->
+<!-- <StackLayout class="p-10"> -->
 
+<!-- <igt-barcode-scanner></igt-barcode-scanner> -->
 
+<TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
+  <StackLayout *tabItem="{title: 'My Fridge'}">
+      <GridLayout>
+          <RadListView [items]="myProductsArray">
+              <ng-template tkListItemTemplate let-item="item">
+                <igt-product [product]="item"></igt-product>
+              </ng-template>
+              <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100" spanCount="2"></ListViewGridLayout>
+            </RadListView>
+        </GridLayout>
+
+        <Button (tap)="addProduct()" >X</Button>
   </StackLayout>
 
-  <!-- <StackLayout orientation="vertical">
-    <Label  class="h3" text="My Recipes"></Label>
-    <RadListView [items]="myProducts">
-      <ng-template tkListItemTemplate let-product="item">
-          <StackLayout orientation="verical">
-              <Label class="nameLabel" [text]="product.name"></Label>
-              <Label class="descriptionLabel" [text]="product.description"></Label>
-          </StackLayout>
-      </ng-template>
-    </RadListView>
-  </StackLayout> -->
-</StackLayout>
+  <StackLayout *tabItem="{title: 'My Recipes'}">
+    <GridLayout >
+      <RadListView [items]="myRecipesArray" row="*">
+          <ng-template tkListItemTemplate let-item="item">
+            <igt-recipe class="m-5" [recipe]="item"></igt-recipe>
+          </ng-template>
+          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100"></ListViewGridLayout>
+      </RadListView>
+    </GridLayout>
+  </StackLayout>
+
+  <StackLayout *tabItem="{title: 'Fearured Recipes'}">
+    <GridLayout>
+      <RadListView [items]="featuredRecipesArray">
+          <ng-template tkListItemTemplate let-item="item">
+            <igt-recipe [recipe]="item"></igt-recipe>
+          </ng-template>
+          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100"></ListViewGridLayout>
+      </RadListView>
+    </GridLayout>
+  </StackLayout>
+</TabView>
