@@ -3,36 +3,32 @@
     ios.systemIcon="9" ios.position="right"
     android.systemIcon="ic_menu_agenda" android.position="actionBar"></ActionItem>
 
-    <ActionItem (tap)="openSearch()"
-    ios.systemIcon="9" ios.position="right"
-    android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
+    <ActionItem (tap)="openSearch()" ios.systemIcon="9" ios.position="right" android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
 </ActionBar>
-
-<!-- <StackLayout class="p-10"> -->
-
-<!-- <igt-barcode-scanner></igt-barcode-scanner> -->
 
 <TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
   <StackLayout *tabItem="{title: 'My Fridge'}">
-      <GridLayout>
-          <RadListView [items]="myProductsArray">
-              <ng-template tkListItemTemplate let-item="item">
-                <igt-product [product]="item"></igt-product>
-              </ng-template>
-              <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100" spanCount="2"></ListViewGridLayout>
-            </RadListView>
-        </GridLayout>
-
-        <Button (tap)="addProduct()" >X</Button>
+    <Label *ngIf="myProductsArray && !myProductsArray.length"  class="text-center m-t-10" text="No products on your fridge"></Label>
+    <Button text="Add Product" (tap)="addProduct()" class="btn btn-primary"></Button>
+    <GridLayout *ngIf="myProductsArray?.length">
+      <RadListView [items]="myProductsArray">
+          <ng-template tkListItemTemplate let-item="item">
+            <igt-product (removed)="refresh()" [product]="item"></igt-product>
+          </ng-template>
+          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"  spanCount="2"></ListViewGridLayout>
+        </RadListView>
+    </GridLayout>
   </StackLayout>
 
   <StackLayout *tabItem="{title: 'My Recipes'}">
+      <Button text="Add Recipe" (tap)="addRecipe()" class="btn btn-primary"></Button>
+
     <GridLayout >
       <RadListView [items]="myRecipesArray" row="*">
-          <ng-template tkListItemTemplate let-item="item">
-            <igt-recipe class="m-5" [recipe]="item"></igt-recipe>
-          </ng-template>
-          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100"></ListViewGridLayout>
+        <ng-template tkListItemTemplate let-item="item">
+          <igt-recipe class="m-5" [recipe]="item"></igt-recipe>
+        </ng-template>
+        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"></ListViewGridLayout>
       </RadListView>
     </GridLayout>
   </StackLayout>
@@ -40,10 +36,10 @@
   <StackLayout *tabItem="{title: 'Fearured Recipes'}">
     <GridLayout>
       <RadListView [items]="featuredRecipesArray">
-          <ng-template tkListItemTemplate let-item="item">
-            <igt-recipe [recipe]="item"></igt-recipe>
-          </ng-template>
-          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" itemWidth="100"></ListViewGridLayout>
+        <ng-template tkListItemTemplate let-item="item">
+          <igt-recipe [recipe]="item"></igt-recipe>
+        </ng-template>
+        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"></ListViewGridLayout>
       </RadListView>
     </GridLayout>
   </StackLayout>

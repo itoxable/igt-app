@@ -1,5 +1,7 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import { IProduct } from '../../models/product.model';
 
 @Component({
   selector: 'igt-product',
@@ -8,9 +10,20 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class ProductComponent implements OnInit {
 
-  @Input() product: any;
+  @Input() product: IProduct;
+  @Output() removed: EventEmitter<IProduct> = new EventEmitter<IProduct> ();
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() { }
+
+  removeProduct() {
+    this.productService.removeProduct(this.product.id).subscribe(data => {
+      this.removed.emit(data);
+    }
+    , err => {
+      console.dir(err);
+    });
+  }
+
 }

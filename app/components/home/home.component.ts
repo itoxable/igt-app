@@ -4,6 +4,9 @@ import { ObservableArray } from 'tns-core-modules/data/observable-array';
 import { RecipeService } from '../../services/recipe.service';
 import { ProductService } from '../../services/product.service';
 import { RadListView } from 'nativescript-pro-ui/listview';
+import { NavigationService } from '../../services/navigation.service';
+import { IProduct } from '../../models/product.model';
+import { IRecipe } from '../../models/recipe.model';
 
 @Component({
   selector: 'igt-home',
@@ -12,15 +15,15 @@ import { RadListView } from 'nativescript-pro-ui/listview';
 
 export class HomeComponent implements OnInit {
 
-  myProductsArray = [];
-  myRecipesArray = [];
-  featuredRecipesArray = [];
-  constructor(private productService: ProductService, private recipeService: RecipeService) { }
+  myProductsArray: IProduct[];
+  myRecipesArray: IRecipe[] = [];
+  featuredRecipesArray: IRecipe[] = [];
+
+  constructor(private productService: ProductService,
+    private recipeService: RecipeService, private navigationService: NavigationService) { }
 
   ngOnInit() {
-    this.productService.getMyProducts().subscribe(products => {
-      this.myProductsArray = products;
-    });
+    this.getMyProducts();
 
     this.recipeService.getMyRecipes().subscribe(recipes => {
       this.myRecipesArray = recipes;
@@ -30,16 +33,33 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  refreshProducts() {
+    this.getMyProducts();
+  }
+
+
+  getMyProducts() {
+    this.productService.getMyProducts().subscribe((products: IProduct[]) => {
+      this.myProductsArray = products;
+    }, err => {
+      this.myProductsArray = [];
+    });
+  }
+
   openSearch() {
     console.log('openSearch');
   }
 
   onIndexChanged($event) {
-    console.log($event);
+    // console.log($event);
   }
 
   addProduct() {
-    console.log('addProduct');
+    this.navigationService.go([`/secure/new-product`]);
   }
 
+  addRecipe() {
+    this.navigationService.go([`/secure/new-recipe`]);
+  }
 }
+

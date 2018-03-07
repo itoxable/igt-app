@@ -1,0 +1,66 @@
+
+<ActionBar title="New Product">
+  <NavigationButton text="Go Back" (tap)="goHome()" android.systemIcon="ic_menu_close_clear_cancel"></NavigationButton>
+</ActionBar>
+
+<ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
+  <StackLayout  class="p-10">
+    
+    <StackLayout class="m-b-15">
+        <Label text="Name" class="input-label m-0"></Label>
+        <TextField required hint="Name" [(ngModel)]="product.name"></TextField>
+      </StackLayout>
+
+      <StackLayout class="m-b-15">
+        <Label text="Quantity" class="input-label m-0"></Label>
+        <TextField required hint="Quantity" [(ngModel)]="product.quantity"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Description" class="input-label m-0"></Label>
+        <TextField required hint="Description" [(ngModel)]="product.description"></TextField>
+      </StackLayout>
+  
+      <Label class="m-y-15 t-18" text="Nutritional info"></Label>
+    
+      <StackLayout class="m-b-15">
+        <Label text="Calories" class="input-label m-0"></Label>
+        <TextField required hint="Calories" [(ngModel)]="product.calories"></TextField>
+      </StackLayout>
+      
+      <StackLayout class="m-b-15">
+        <Label text="Carbs" class="input-label m-0"></Label>
+        <TextField required hint="Carbs" [(ngModel)]="product.carbs"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Unsaturated Fats" class="input-label m-0"></Label>
+        <TextField required hint="Unsaturated Fats" [(ngModel)]="product.unsaturatedFat"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Saturated Fats" class="input-label m-0"></Label>
+        <TextField required hint="Saturated Fats" [(ngModel)]="product.saturatedFat"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Polyunsaturated Fats" class="input-label m-0"></Label>
+        <TextField required hint="Polyunsaturated Fats" [(ngModel)]="product.polyunsaturatedFat"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Trans Fats" class="input-label m-0"></Label>
+        <TextField required hint="Trans Fats" [(ngModel)]="product.transFat"></TextField>
+      </StackLayout>
+  
+      <StackLayout class="m-b-15">
+        <Label text="Vitamins" class="input-label m-0"></Label>
+        <TextField required hint="Vitamins" [(ngModel)]="product.vitamins"></TextField>
+      </StackLayout>
+
+
+
+
+
+  </StackLayout>
+</ScrollView>

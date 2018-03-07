@@ -44,6 +44,9 @@ import { RecipeService } from './services/recipe.service';
 // import * as frescoModule from 'nativescript-fresco';
 import { ProductService } from './services/product.service';
 import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
+import { VetricalHomeComponent } from './components/vertical-home/vertical-home.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 
 application.on(application.launchEvent, function (args) {
   nsFacebook.init('2074423572770618');
@@ -73,11 +76,14 @@ application.on(application.launchEvent, function (args) {
       LoggedInLayoutComponent,
       LoggedOutLayoutComponent,
       HomeComponent,
+      VetricalHomeComponent,
       ApiErrorComponent,
       ProfileComponent,
       RecipeFilterComponent,
       RecipeComponent,
       ProductComponent,
+      NewProductComponent,
+      NewRecipeComponent,
       BarcodeScannerComponent
     ],
     providers: [

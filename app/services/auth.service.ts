@@ -83,10 +83,10 @@ export class AuthService {
 facebookLogin() {
     Facebook.login((error, fbData) => {
         if (error) {
-            console.log(error);
+            // console.log(error);
             alert('Error during login: ' + error.message);
         } else {
-          console.log(fbData);
+          // console.log(fbData);
           ApplicationSettings.setString('access_token', fbData.token);
         }
     });

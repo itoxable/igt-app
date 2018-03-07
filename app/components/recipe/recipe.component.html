@@ -1,7 +1,7 @@
-<StackLayout class="m-5 recipe">
-    <Image [src]="recipe.image" stretch="aspectFill" height="120"  class="m-0"></Image>
-    <StackLayout class="c-bg-white p-5 m-0">
-      <Label [text]="recipe.name"></Label>
-      <Label [text]="recipe.description"></Label>
-    </StackLayout>
+<StackLayout class="m-5 recipe" (tap)="goToRecipe()">
+  <Image [src]="recipe.image" stretch="aspectFill" height="120"  class="m-0"></Image>
+  <StackLayout class="c-bg-white p-5 m-0">
+    <Label [text]="recipe.name"></Label>
+    <Label [text]="recipe.description"></Label>
+  </StackLayout>
 </StackLayout>

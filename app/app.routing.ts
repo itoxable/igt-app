@@ -12,6 +12,8 @@ import { EmailLoginComponent } from './components/login/email-login/email-login.
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApiErrorComponent } from './components/api-error/api-error.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,9 @@ const routes: Routes = [
     path: 'secure', component: LoggedInLayoutComponent, canActivate: [IsLoggedInGuard],
     children: [
       { path: 'home', component: HomeComponent },
+      { path: 'new-product', component: NewProductComponent },
+      { path: 'new-recipe', component: NewRecipeComponent },
+      { path: 'recipe/:id', component: NewRecipeComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },

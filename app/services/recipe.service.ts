@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { IRecipe } from '../models/recipe.model';
+import { API_URL } from '../constants';
 
 @Injectable()
 export class RecipeService {
@@ -9,65 +11,24 @@ export class RecipeService {
   constructor(private httpClient: HttpClient) { }
 
   getFeaturedRecipes(): Observable<any> {
-    return Observable.of([
-      {
-        name: 'Feat',
-        description: 'description',
-        image: 'https://www.bbcgoodfood.com/sites/default/files/styles/carousel_small/public/recipe/recipe-image/2017/11/orange-marmalade-glazed-roast-duck.jpg?itok=yxM4LNJi'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://travelwirenews-lgqvurlx.netdna-ssl.com/wp-content/uploads/2017/12/JS136915719.jpg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'http://travel.home.sndimg.com/content/dam/images/travel/fullset/2014/07/20/32/food-paradise-102-ss-001.rend.hgtvcom.966.544.suffix/1491584380240.jpeg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://travelwirenews-lgqvurlx.netdna-ssl.com/wp-content/uploads/2017/12/JS136915719.jpg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://cdn.cnn.com/cnnnext/dam/assets/170308101233-shrimp-stock-super-169.jpg'
-      }
-    ]);
+    return this.httpClient.get(`${API_URL}/api/recipe/featured`).map((data) => data as IRecipe[]);
   }
 
   getMyRecipes(): Observable<any> {
-    return Observable.of([
-      {
-        name: 'Mine',
-        description: 'description',
-        image: 'https://www.bbcgoodfood.com/sites/default/files/styles/carousel_small/public/recipe/recipe-image/2017/11/orange-marmalade-glazed-roast-duck.jpg?itok=yxM4LNJi'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://travelwirenews-lgqvurlx.netdna-ssl.com/wp-content/uploads/2017/12/JS136915719.jpg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'http://travel.home.sndimg.com/content/dam/images/travel/fullset/2014/07/20/32/food-paradise-102-ss-001.rend.hgtvcom.966.544.suffix/1491584380240.jpeg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://travelwirenews-lgqvurlx.netdna-ssl.com/wp-content/uploads/2017/12/JS136915719.jpg'
-      },
-      {
-        name: 'Yess',
-        description: 'description',
-        image: 'https://cdn.cnn.com/cnnnext/dam/assets/170308101233-shrimp-stock-super-169.jpg'
-      }
-    ]);
+    return this.httpClient.get(`${API_URL}/api/recipe/user`).map((data) => data as IRecipe[]);
   }
 
-  saveRecipe(recipe) {}
+  removeRecipe(recipeId): Observable<IRecipe> {
+    console.log(`${API_URL}/api/recipe/remove-user/${recipeId}`);
+    return this.httpClient.delete(`${API_URL}/api/recipe/remove-user/${recipeId}`).map((data) => data as IRecipe);
+  }
+
+  saveRecipe(recipe: IRecipe): Observable<IRecipe> {
+    if (recipe.id) {
+      return this.httpClient.put(`${API_URL}/api/recipe/save`, recipe);
+    } else {
+      return this.httpClient.post(`${API_URL}/api/recipe/add`, recipe);
+    }
+  }
 
 }

@@ -20,7 +20,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = ApplicationSettings.getString(AUTHORIZATION_KEY);
-    console.log('token');
     console.log(token);
     if (token) {
       request = request.clone({
@@ -29,20 +28,15 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       });
     }
-    console.log(request);
-
 
     return next.handle(request).do(evt => {
       //
     }, (err: HttpErrorResponse) => {
-      console.log('err');
-      console.log(err);
-
+      console.dir(err);
       if (err.status === 403) {
         ApplicationSettings.remove(AUTHORIZATION_KEY);
         this.navigationService.go(['/']);
       }
     });
-
   }
 }

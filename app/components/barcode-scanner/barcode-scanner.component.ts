@@ -17,15 +17,15 @@ export class BarcodeScannerComponent {
         price: '',
         inventory: '',
         sku: ''
-      }
+      };
     }
 
     public scan() {
       this.barcodeScanner.scan({
-        cancelLabel: 'Stop scanning',
-        message: 'Go scan something',
+        cancelLabel: 'Cnacel',
+        message: 'Barcode',
         preferFrontCamera: false,
-        showFlipCameraButton: true
+        showFlipCameraButton: false
       }).then((result) => {
         this.product = this.database.getDocument(result.text);
       });

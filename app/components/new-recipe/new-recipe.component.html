@@ -1,0 +1,66 @@
+
+<ActionBar title="New Recipe">
+  <NavigationButton text="Go Back" (tap)="goHome()" android.systemIcon="ic_menu_close_clear_cancel"></NavigationButton>
+</ActionBar>
+
+<ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
+  <StackLayout  class="p-10">
+
+    <StackLayout class="m-b-15">
+      <Label text="Name" class="input-label m-0"></Label>
+      <TextField required hint="Name" [(ngModel)]="recipe.name"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Directions" class="input-label m-0"></Label>
+      <TextField required hint="Directions" [(ngModel)]="recipe.directions"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Description" class="input-label m-0"></Label>
+      <TextField required hint="Description" [(ngModel)]="recipe.description"></TextField>
+    </StackLayout>
+
+    <Label  class="m-y-15" text="Nutritional info"></Label>
+
+    <StackLayout class="m-b-15">
+      <Label text="Calories" class="input-label m-0"></Label>
+      <TextField required hint="Calories" [(ngModel)]="recipe.calories"></TextField>
+    </StackLayout>
+    
+    <StackLayout class="m-b-15">
+      <Label text="Carbs" class="input-label m-0"></Label>
+      <TextField required hint="Carbs" [(ngModel)]="recipe.carbs"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Unsaturated Fats" class="input-label m-0"></Label>
+      <TextField required hint="Unsaturated Fats" [(ngModel)]="recipe.unsaturatedFat"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Saturated Fats" class="input-label m-0"></Label>
+      <TextField required hint="Saturated Fats" [(ngModel)]="recipe.saturatedFat"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Polyunsaturated Fats" class="input-label m-0"></Label>
+      <TextField required hint="Polyunsaturated Fats" [(ngModel)]="recipe.polyunsaturatedFat"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Trans Fats" class="input-label m-0"></Label>
+      <TextField required hint="Trans Fats" [(ngModel)]="recipe.transFat"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Vitamins" class="input-label m-0"></Label>
+      <TextField required hint="Vitamins" [(ngModel)]="recipe.vitamins"></TextField>
+    </StackLayout>
+  
+    <Label *ngIf="errorMessage" class="c-ruby text-center" [text]="errorMessage"></Label>
+
+    <Button text="Save" (tap)="save()" class="btn btn-primary"></Button>
+
+  </StackLayout>
+</ScrollView>

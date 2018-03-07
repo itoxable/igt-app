@@ -21,6 +21,7 @@
 		"@angular/router": "~5.2.0",
 		"nativescript-angular": "~5.2.0",
 		"nativescript-barcodescanner": "^2.7.5",
+		"nativescript-camera": "^3.2.1",
 		"nativescript-facebook": "^2.2.0",
 		"nativescript-fresco": "^3.0.6",
 		"nativescript-pro-ui": "^3.4.1",
