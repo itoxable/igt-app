@@ -12,7 +12,7 @@ export class IsLoggedInGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.authService.isLoggedId()) {
-      this.navigationService.go(['/login']);
+      this.navigationService.go(['/login'], false);
       return false;
     }
     return true;

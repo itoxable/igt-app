@@ -6,16 +6,18 @@
     <ActionItem (tap)="openSearch()" ios.systemIcon="9" ios.position="right" android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
 </ActionBar>
 
-<TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkExampleTitle sdkToggleNavButton>
+<TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkToggleNavButton>
+  
   <StackLayout *tabItem="{title: 'My Fridge'}">
-    <Label *ngIf="myProductsArray && !myProductsArray.length"  class="text-center m-t-10" text="No products on your fridge"></Label>
-    <Button text="Add Product" (tap)="addProduct()" class="btn btn-primary"></Button>
+
+    <igt-new-product class="m-b-10" (productSave)="refreshProducts()"></igt-new-product>
+
     <GridLayout *ngIf="myProductsArray?.length">
       <RadListView [items]="myProductsArray">
           <ng-template tkListItemTemplate let-item="item">
-            <igt-product (removed)="refresh()" [product]="item"></igt-product>
+            <igt-product (removed)="refreshProducts()" [product]="item" class="m-b-10"></igt-product>
           </ng-template>
-          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"  spanCount="2"></ListViewGridLayout>
+          <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"  spanCount="1"></ListViewGridLayout>
         </RadListView>
     </GridLayout>
   </StackLayout>

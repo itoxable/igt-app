@@ -21,16 +21,17 @@ export class ProductService {
   }
 
   removeProduct(productId): Observable<IProduct> {
-    console.log(`${API_URL}/api/product/remove-user/${productId}`);
     return this.httpClient.delete(`${API_URL}/api/product/remove-user/${productId}`).map((data) => data as IProduct);
   }
 
   saveProduct(product: IProduct): Observable<IProduct> {
+    console.dir(product);
     if (product.id) {
-      return this.httpClient.put(`${API_URL}/api/product/add`, product);
+      return this.httpClient.put(`${API_URL}/api/product/save`, product);
     } else {
-      return this.httpClient.post(`${API_URL}/api/product/save`, product);
+      console.log('ADD: ' + `${API_URL}/api/product/add`);
+      return this.httpClient.post(`${API_URL}/api/product/add`, product);
     }
   }
-
 }
+

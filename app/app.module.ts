@@ -11,17 +11,15 @@ import * as ApplicationSettings from 'application-settings';
 import * as nsFacebook from 'nativescript-facebook';
 import * as application from 'tns-core-modules/application';
 import { BarcodeScanner } from 'nativescript-barcodescanner';
+import { NgShadowModule } from 'nativescript-ng-shadow';
 
-import { ItemService } from './item/item.service';
-import { ItemsComponent } from './item/items.component';
-import { ItemDetailComponent } from './item/item-detail.component';
 import { AuthService } from './services/auth.service';
 import { LoggedInLayoutComponent } from './components/layouts/logged-in-layout.component';
 import { LoggedOutLayoutComponent } from './components/layouts/logged-out-layout.component';
 import { IsLoggedInGuard } from './services/is-logged-in.guard';
 import { IsLoggedOutGuard } from './services/is-logged-out.guard';
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
-import { NativeScriptRouterModule, NSModuleFactoryLoader } from 'nativescript-angular/router';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { EmailLoginComponent } from './components/login/email-login/email-login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -47,6 +45,8 @@ import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-sc
 import { VetricalHomeComponent } from './components/vertical-home/vertical-home.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
+import { AppService } from './services/app.service';
+import { FontPipe } from './pipes/font.pipe';
 
 application.on(application.launchEvent, function (args) {
   nsFacebook.init('2074423572770618');
@@ -60,6 +60,7 @@ application.on(application.launchEvent, function (args) {
       CommonModule,
       // CommonDirectivesModule,
       // TNSFrescoModule,
+      NgShadowModule,
       NativeScriptModule,
       NativeScriptRouterModule,
       NativeScriptFormsModule,
@@ -69,8 +70,6 @@ application.on(application.launchEvent, function (args) {
     ],
     declarations: [
       AppComponent,
-      ItemsComponent,
-      ItemDetailComponent,
       LoginComponent,
       EmailLoginComponent,
       LoggedInLayoutComponent,
@@ -84,12 +83,12 @@ application.on(application.launchEvent, function (args) {
       ProductComponent,
       NewProductComponent,
       NewRecipeComponent,
-      BarcodeScannerComponent
+      BarcodeScannerComponent,
+      FontPipe
     ],
     providers: [
       { provide: APP_INITIALIZER, useFactory: initializer, deps: [AuthService], multi: true },
       NavigationService,
-      ItemService,
       AuthService,
       IsLoggedInGuard,
       IsLoggedOutGuard,
@@ -97,7 +96,7 @@ application.on(application.launchEvent, function (args) {
       RecipeService,
       ProductService,
       BarcodeScanner,
-      { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader },
+      AppService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,

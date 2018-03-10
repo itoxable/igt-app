@@ -1,9 +1,12 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { NavigationService } from '../../services/navigation.service';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../models/product.model';
-import { Page } from 'tns-core-modules/ui/page';
+import { Page, Color } from 'tns-core-modules/ui/page';
+import * as page from 'tns-core-modules/ui/page';
+import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
+declare var android;
 
 @Component({
   selector: 'igt-new-product',
@@ -12,27 +15,30 @@ import { Page } from 'tns-core-modules/ui/page';
 
 export class NewProductComponent implements OnInit {
 
+  @Output() productSave: EventEmitter<IProduct> = new EventEmitter<IProduct>();
+  @ViewChild('newProdLayout') newProdLayout: ElementRef;
   product: IProduct = {};
   errorMessage: string;
-
-  constructor(private navigationService: NavigationService, private productService: ProductService) {
-   }
+  saving = false;
+  saveIcon = String.fromCharCode(0xE876);
+  constructor(thisPage: Page, private navigationService: NavigationService, private productService: ProductService) {
+  }
 
   ngOnInit() {
-   }
+    const layout: FlexboxLayout = this.newProdLayout.nativeElement as FlexboxLayout;
+    console.log(this.saveIcon);
+    // layout.nativeView.setShadowLayer(5, 0.1, 1, android.graphics.Color.parseColor('#CCCCCC'));
+  }
 
   save() {
-    this.productService.saveProduct(this.product).subscribe((data) => {
+    this.saving = true;
+    this.productService.saveProduct(this.product).finally(() => this.saving = false).subscribe((data) => {
       this.product = data;
-      this.navigationService.go([`/secure/home`]);
+      this.productSave.emit(this.product);
+      this.product = {};
     }, err => {
       console.dir(err);
       this.errorMessage = 'error!';
     });
   }
-
-  goHome() {
-    this.navigationService.go([`/secure`]);
-  }
-
 }

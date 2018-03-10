@@ -30,12 +30,12 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request).do(evt => {
-      //
+
     }, (err: HttpErrorResponse) => {
       console.dir(err);
       if (err.status === 403) {
         ApplicationSettings.remove(AUTHORIZATION_KEY);
-        this.navigationService.go(['/']);
+        this.navigationService.go(['/login'], false);
       }
     });
   }

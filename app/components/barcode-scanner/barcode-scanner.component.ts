@@ -10,6 +10,7 @@ export class BarcodeScannerComponent {
 
     private database: any;
     public product: any;
+    barCodeIcon = String.fromCharCode(0xE84E);
 
     public constructor(private router: Router, private barcodeScanner: BarcodeScanner) {
       this.product = {

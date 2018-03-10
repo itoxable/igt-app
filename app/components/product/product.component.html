@@ -1,11 +1,7 @@
-
-<StackLayout class="m-5 product">
-    <Image [src]="product.image" stretch="aspectFill" height="120"  class="m-0"></Image>
-    <StackLayout class="c-bg-white p-5 m-0">
-      <Label [text]="product.name"></Label>
-      <Label [text]="product.description"></Label>
-
-      <Button text="x" (tap)="removeProduct()" ></Button>
-
-    </StackLayout>
-</StackLayout>
+<FlexboxLayout justifyContent="space-between" alignItems="flex-start" verticalAlignment="center" class="c-bg-white p-10 m-y-2  product" >
+  <Label [text]="product.name" class="t-20"></Label>
+  <StackLayout orientation="horizontal" >
+    <Label [text]="product.quantity" class="t-20"></Label>
+    <Label text="&times;" class="m-l-10 t-20" (tap)="removeProduct()"></Label>
+  </StackLayout>
+</FlexboxLayout>
