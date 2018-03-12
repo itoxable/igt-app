@@ -23,7 +23,7 @@ export class BarcodeScannerComponent {
 
     public scan() {
       this.barcodeScanner.scan({
-        cancelLabel: 'Cnacel',
+        cancelLabel: 'Cancel',
         message: 'Barcode',
         preferFrontCamera: false,
         showFlipCameraButton: false

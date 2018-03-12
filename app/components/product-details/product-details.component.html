@@ -1,0 +1,33 @@
+<ActionBar title="Edit {{product.name}}">
+    <NavigationButton text="Go Back" (tap)="goHome()" android.systemIcon="ic_menu_close_clear_cancel"></NavigationButton>
+  </ActionBar>
+<ScrollView orientation="vertical">
+  <StackLayout  class="p-10">
+
+    <StackLayout class="m-b-15">
+      <Label text="Name" class="input-label m-0"></Label>
+      <TextField required hint="Name" [(ngModel)]="product.name"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Quantity" class="input-label m-0"></Label>
+      <TextField required hint="Quantity" keyboardType="number" [(ngModel)]="product.quantity"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-15">
+      <Label text="Description" class="input-label m-0"></Label>
+      <TextField required hint="Description" [(ngModel)]="product.description"></TextField>
+    </StackLayout>
+
+    <StackLayout class="m-b-10">
+      <Label text="Best Before" class="input-label m-0"></Label>
+      <DatePicker (loaded)="setDatePicker($event)"  [(ngModel)]="product.bestBeforeDate" ></DatePicker>
+    </StackLayout>
+
+    <Label *ngIf="errorMessage" class="c-ruby text-center" [text]="errorMessage"></Label>
+    <Label *ngIf="successMessage" class="c-lime text-center" [text]="successMessage"></Label>
+
+    <Button text="Save" (tap)="save()" class="test btn btn-primary"></Button>
+
+  </StackLayout>
+</ScrollView>

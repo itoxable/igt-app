@@ -16,17 +16,8 @@ $facebookColor: #4267b2;
   }
 }
 
-.fontawesome-fa-brands-400{
-  font-family: 'fa-brands-400';
-}
-.fontawesome-solid-900 {
-  font-family: 'fa-solid-900';
-}
-.fontawesome-fa-regular-400 {
-  font-family: 'fa-regular-400';
-}
 .fontawesome-icons {
-  font-family: 'fa-regular-400', 'fa-regular-400', 'fa-brands-400';
+  font-family: 'fontawesome-webfont';
 }
 .material-icons {
   font-family: "MaterialIcons-Regular";
@@ -35,6 +26,11 @@ $facebookColor: #4267b2;
 
 .page {
   // background-color: #DDD;
+}
+
+.test {
+  border-color: #111; 
+  border-width: 1; 
 }
 
 .product {

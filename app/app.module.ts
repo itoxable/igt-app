@@ -47,6 +47,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 import { AppService } from './services/app.service';
 import { FontPipe } from './pipes/font.pipe';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 application.on(application.launchEvent, function (args) {
   nsFacebook.init('2074423572770618');
@@ -84,6 +85,7 @@ application.on(application.launchEvent, function (args) {
       NewProductComponent,
       NewRecipeComponent,
       BarcodeScannerComponent,
+      ProductDetailsComponent,
       FontPipe
     ],
     providers: [

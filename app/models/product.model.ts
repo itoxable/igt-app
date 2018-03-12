@@ -4,4 +4,6 @@ export interface IProduct {
   category?: string;
   image?: string;
   quantity?: number;
+  bestBeforeDate?: Date;
+  description?: string;
 }

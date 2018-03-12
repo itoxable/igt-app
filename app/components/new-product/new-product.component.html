@@ -1,16 +1,16 @@
 
 
-<FlexboxLayout justifyContent="space-between" alignItems="flex-start" verticalAlignment="center" class="new-product p-10 m-b-15" #newProdLayout>
+<FlexboxLayout justifyContent="space-between" alignItems="flex-start" shadow="2" verticalAlignment="center" class="new-product p-10 m-b-5" #newProdLayout>
   
   <TextField class="input-text" style="background-color: white" width="200"  hint="Add item" [(ngModel)]="product.name"></TextField>
   <TextField class="input-text" width="70"  hint="Quant" [(ngModel)]="product.quantity"></TextField>
 
-  <StackLayout orientation="horizontal" *ngIf="!product?.name" width="40">
-    <igt-barcode-scanner></igt-barcode-scanner>
+  <StackLayout *ngIf="!product?.name" width="40" height="47" class="test">
+    <igt-barcode-scanner  verticalAlignment="center"></igt-barcode-scanner>
   </StackLayout>
 
-  <StackLayout orientation="horizontal" *ngIf="product?.name" width="40">
-    <Label text="{{'0xE876' | font}}" (tap)="save()" class="material-icons" android.systemIcon="ic_menu_agenda"></Label>
+  <StackLayout orientation="horizontal" *ngIf="product?.name" width="40"  verticalAlignment="center">
+    <Label text="{{'0xE876' | font}}" (tap)="save()" class="material-icons"  verticalAlignment="center" android.systemIcon="ic_menu_agenda"></Label>
   </StackLayout>
 
 </FlexboxLayout>

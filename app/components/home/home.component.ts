@@ -60,10 +60,6 @@ export class HomeComponent implements OnInit {
     // console.log($event);
   }
 
-  addProduct() {
-    this.navigationService.go([`/secure/new-product`]);
-  }
-
   addRecipe() {
     this.navigationService.go([`/secure/new-recipe`]);
   }
