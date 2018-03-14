@@ -6,6 +6,7 @@ import { IProduct } from '../../models/product.model';
 import { Page, Color } from 'tns-core-modules/ui/page';
 import * as page from 'tns-core-modules/ui/page';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
+import { LoadingIndicator } from 'nativescript-loading-indicator';
 declare var android;
 
 @Component({
@@ -19,20 +20,22 @@ export class NewProductComponent implements OnInit {
   @ViewChild('newProdLayout') newProdLayout: ElementRef;
   product: IProduct = {};
   errorMessage: string;
-  saving = false;
-  saveIcon = String.fromCharCode(0xE876);
+
+  loadingIndicator: LoadingIndicator = new LoadingIndicator();
+
   constructor(thisPage: Page, private navigationService: NavigationService, private productService: ProductService) {
   }
 
   ngOnInit() {
     const layout: FlexboxLayout = this.newProdLayout.nativeElement as FlexboxLayout;
-    console.log(this.saveIcon);
     // layout.nativeView.setShadowLayer(5, 0.1, 1, android.graphics.Color.parseColor('#CCCCCC'));
   }
 
   save() {
-    this.saving = true;
-    this.productService.saveProduct(this.product).finally(() => this.saving = false).subscribe((data) => {
+    this.loadingIndicator.show({
+      message: 'Saving'
+    });
+    this.productService.saveProduct(this.product).finally(() => () => this.loadingIndicator.hide()).subscribe((data) => {
       this.product = data;
       this.productSave.emit(this.product);
       this.product = {};
@@ -42,3 +45,4 @@ export class NewProductComponent implements OnInit {
     });
   }
 }
+

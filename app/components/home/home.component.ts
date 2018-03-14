@@ -19,15 +19,12 @@ export class HomeComponent implements OnInit {
   myProductsArray: IProduct[];
   myRecipesArray: IRecipe[] = [];
   featuredRecipesArray: IRecipe[] = [];
-  loading: boolean;
 
   constructor(private productService: ProductService, private appService: AppService,
     private recipeService: RecipeService, private navigationService: NavigationService) { }
 
   ngOnInit() {
-
-    this.appService.loader().subscribe(loading => this.loading = loading);
-
+    this.appService.startLoader();
     this.getMyProducts();
 
     this.recipeService.getMyRecipes().subscribe(recipes => {
@@ -44,8 +41,8 @@ export class HomeComponent implements OnInit {
 
 
   getMyProducts() {
-    this.productService.getMyProducts().subscribe((products: IProduct[]) => {
-      console.log(products);
+    this.appService.startLoader();
+    this.productService.getMyProducts().finally(() => this.appService.hideLoader()).delay(2000).subscribe((products: IProduct[]) => {
       this.myProductsArray = products;
     }, err => {
       this.myProductsArray = [];
@@ -58,10 +55,11 @@ export class HomeComponent implements OnInit {
 
   onIndexChanged($event) {
     // console.log($event);
+
   }
 
   addRecipe() {
-    this.navigationService.go([`/secure/new-recipe`]);
+    this.navigationService.go([`/secure/new-recipe/`]);
   }
 }
 

@@ -6,6 +6,16 @@
 <ScrollView orientation="vertical" sdkExampleTitle sdkToggleNavButton>
   <StackLayout  class="p-10">
 
+    <GridLayout>
+        <ImageSwipe [items]="items" imageUrlProperty="uri" (tap)="tapped()" backgroundColor="#000000">
+        </ImageSwipe>
+    </GridLayout>
+
+    <StackLayout class="m-b-15">
+      <Button text="Take Picture" (tap)='onTakePictureTap($event)'></Button>
+      <Button text="Pick Multiple" (tap)="selectImages()"></Button>
+    </StackLayout>
+
     <StackLayout class="m-b-15">
       <Label text="Name" class="input-label m-0"></Label>
       <TextField required hint="Name" [(ngModel)]="recipe.name"></TextField>

@@ -1,24 +1,23 @@
 
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { LoadingIndicator } from 'nativescript-loading-indicator';
 
 @Injectable()
 export class AppService {
 
-  private loading: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private loadingIndicator: LoadingIndicator = new LoadingIndicator();
 
   constructor() { }
 
-  startLoader() {
-    this.loading.emit(true);
+  startLoader(message = 'Loading') {
+    this.loadingIndicator.show({
+      message: 'Loading'
+    });
   }
 
-  endLoader() {
-    this.loading.emit(false);
-  }
-
-  loader(): Observable<boolean> {
-    return this.loading;
+  hideLoader() {
+    this.loadingIndicator.hide();
   }
 
 }

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   email() {
-    this.navigationService.go(['/email-login']);
+    this.navigationService.go(['/email-login/']);
   }
 }
 
