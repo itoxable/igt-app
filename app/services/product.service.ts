@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { API_URL } from '../constants';
 import { IProduct } from '../models/product.model';
 import { AuthService } from './auth.service';
+import { IUser } from '../models/user.model';
 
 @Injectable()
 export class ProductService {
@@ -13,7 +14,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getProduct(id): Observable<IProduct> {
-    return this.httpClient.get(`${API_URL}/api/product-repo/${id}`).map(data => data as IProduct);
+    return this.httpClient.get(`${API_URL}/api/product/user-product/${id}`).map(data => data as IProduct);
   }
 
   getMyProducts(): Observable<IProduct[]> {

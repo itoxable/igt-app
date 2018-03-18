@@ -7,6 +7,7 @@ import { Page, Color } from 'tns-core-modules/ui/page';
 import * as page from 'tns-core-modules/ui/page';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 import { LoadingIndicator } from 'nativescript-loading-indicator';
+import { BarcodeScanner } from 'nativescript-barcodescanner';
 declare var android;
 
 @Component({
@@ -23,7 +24,9 @@ export class NewProductComponent implements OnInit {
 
   loadingIndicator: LoadingIndicator = new LoadingIndicator();
 
-  constructor(thisPage: Page, private navigationService: NavigationService, private productService: ProductService) {
+  constructor(thisPage: Page, private navigationService: NavigationService,
+    private barcodeScanner: BarcodeScanner,
+    private productService: ProductService) {
   }
 
   ngOnInit() {
@@ -31,11 +34,24 @@ export class NewProductComponent implements OnInit {
     // layout.nativeView.setShadowLayer(5, 0.1, 1, android.graphics.Color.parseColor('#CCCCCC'));
   }
 
+  public barcodeScan() {
+    this.barcodeScanner.scan({
+      cancelLabel: 'Cancel',
+      message: 'Barcode',
+      preferFrontCamera: false,
+      showFlipCameraButton: false
+    }).then((result) => {
+      console.log(result);
+    });
+  }
+
   save() {
     this.loadingIndicator.show({
       message: 'Saving'
     });
-    this.productService.saveProduct(this.product).finally(() => () => this.loadingIndicator.hide()).subscribe((data) => {
+    this.productService.saveProduct(this.product)
+    .finally(() => this.loadingIndicator.hide())
+    .subscribe((data) => {
       this.product = data;
       this.productSave.emit(this.product);
       this.product = {};

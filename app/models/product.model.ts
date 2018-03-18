@@ -3,7 +3,7 @@ export interface IProduct {
   name?: string;
   category?: string;
   image?: string;
-  quantity?: number;
+  quantity?: string;
   bestBeforeDate?: Date;
   description?: string;
 }

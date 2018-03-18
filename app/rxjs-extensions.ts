@@ -10,6 +10,8 @@ import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/let';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/filter';

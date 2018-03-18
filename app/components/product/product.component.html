@@ -1,10 +1,5 @@
-<FlexboxLayout justifyContent="space-between" alignItems="flex-start"  class="c-bg-white p-10 m-y-2  product" >
-  <Label [text]="product.name" verticalAlignment="center"  class="t-20"></Label>
-  
-  <StackLayout orientation="horizontal" class="p-0" verticalAlignment="stretch" >
-    <Label [text]="product.quantity" class="t-20" verticalAlignment="center"></Label>
-    <Label text="{{'0xE254' | font}}" (tap)="editProduct()" class="material-icons m-l-20  t-10" verticalAlignment="center"></Label>
-    <Label text="{{'0xE872' | font}}" class="material-icons m-l-10 t-15" (tap)="removeProduct()" verticalAlignment="center"></Label>
-  </StackLayout>
-  
-</FlexboxLayout>
+<GridLayout columns="*, 30, 30" rows="30" class="c-bg-white  p-r-2 p-l-10 p-y-10 m-y-2 m-x-4 product"  >
+  <Label [text]="product.name + ' - ' + product.quantity" col="0" class="name" verticalAlignment="center"></Label>
+  <Label text="{{'0xE254' | font}}" col="1" (tap)="editProduct()" class="material-icons action" verticalAlignment="center"></Label>
+  <Label text="{{'0xE872' | font}}" col="2" (tap)="removeProduct()" class="material-icons action" verticalAlignment="center"></Label>
+</GridLayout>

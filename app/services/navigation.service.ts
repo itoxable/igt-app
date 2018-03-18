@@ -22,7 +22,7 @@ export class NavigationService {
 
   constructor(private routerExtensions: RouterExtensions) { }
 
-  go(route: Array<string>, clearHistory = true, name?: string) {
+  go(route: Array<string>, clearHistory = false, name?: string) {
     this.routerExtensions.navigate(route, {
       clearHistory: clearHistory,
       animated: true,
@@ -32,5 +32,9 @@ export class NavigationService {
         curve: 'linear'
       }
     });
+  }
+
+  back() {
+    this.routerExtensions.backToPreviousPage();
   }
 }

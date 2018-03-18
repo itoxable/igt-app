@@ -25,7 +25,7 @@ import { EmailLoginComponent } from './components/login/email-login/email-login.
 import { HomeComponent } from './components/home/home.component';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
-// import { NativeScriptHttpModule } from 'nativescript-angular/http';
+import { NativeScriptHttpModule, NSHttp } from 'nativescript-angular/http';
 import { ApiErrorComponent } from './components/api-error/api-error.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NavigationService } from './services/navigation.service';
@@ -41,13 +41,13 @@ import { RecipeService } from './services/recipe.service';
 // import { TNSFrescoModule } from 'nativescript-fresco/angular';
 // import * as frescoModule from 'nativescript-fresco';
 import { ProductService } from './services/product.service';
-import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
 import { VetricalHomeComponent } from './components/vertical-home/vertical-home.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 import { AppService } from './services/app.service';
 import { FontPipe } from './pipes/font.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductsComponent } from './components/products/products.component';
 
 application.on(application.launchEvent, function (args) {
   nsFacebook.init('2074423572770618');
@@ -61,6 +61,7 @@ application.on(application.launchEvent, function (args) {
       CommonModule,
       // CommonDirectivesModule,
       // TNSFrescoModule,
+      NativeScriptHttpModule,
       NgShadowModule,
       NativeScriptModule,
       NativeScriptRouterModule,
@@ -82,14 +83,14 @@ application.on(application.launchEvent, function (args) {
       RecipeFilterComponent,
       RecipeComponent,
       ProductComponent,
+      ProductsComponent,
       NewProductComponent,
       NewRecipeComponent,
-      BarcodeScannerComponent,
       ProductDetailsComponent,
       FontPipe
     ],
     providers: [
-      { provide: APP_INITIALIZER, useFactory: initializer, deps: [AuthService], multi: true },
+    //  { provide: APP_INITIALIZER, useFactory: initializer, deps: [AuthService], multi: true },
       NavigationService,
       AuthService,
       IsLoggedInGuard,
@@ -99,6 +100,7 @@ application.on(application.launchEvent, function (args) {
       ProductService,
       BarcodeScanner,
       AppService,
+      NSHttp,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,

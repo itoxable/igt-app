@@ -1,16 +1,6 @@
-
-
-<FlexboxLayout justifyContent="space-between" alignItems="flex-start" shadow="2" verticalAlignment="center" class="new-product p-10 m-b-5" #newProdLayout>
-  
-  <TextField class="input-text" style="background-color: white" width="200"  hint="Add item" [(ngModel)]="product.name"></TextField>
-  <TextField class="input-text" width="70"  hint="Quant" [(ngModel)]="product.quantity"></TextField>
-
-  <StackLayout *ngIf="!product?.name" width="40" height="47" class="test">
-    <igt-barcode-scanner  verticalAlignment="center"></igt-barcode-scanner>
-  </StackLayout>
-
-  <StackLayout orientation="horizontal" *ngIf="product?.name" width="40"  verticalAlignment="center">
-    <Label text="{{'0xE876' | font}}" (tap)="save()" class="material-icons"  verticalAlignment="center" android.systemIcon="ic_menu_agenda"></Label>
-  </StackLayout>
-
-</FlexboxLayout>
+<GridLayout columns="*, 70, 40" rows="50" class="new-product p-y-10 p-x-5"  #newProdLayout>
+  <TextField class="input-text" col="0"  hint="Add item" [(ngModel)]="product.name"></TextField>
+  <TextField class="input-text" col="1" marginLeft="5" hint="Quant" [(ngModel)]="product.quantity"></TextField>
+  <Label *ngIf="!product?.name" text="{{'0xf02a' | font}}" col="2" (tap)="barcodeScan()" class="fontawesome-icons" horizontalAlignment="center" verticalAlignment="center"></Label>
+  <Label *ngIf="product?.name" text="{{'0xE876' | font}}" col="2" (tap)="save()" class="material-icons test" horizontalAlignment="center"  verticalAlignment="center"></Label>
+</GridLayout>

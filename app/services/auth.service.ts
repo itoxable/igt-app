@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   public isLoggedId(): boolean {
-    const token = ApplicationSettings.getString('authorization');
+    const token = ApplicationSettings.getString(AUTHORIZATION_KEY);
     if (token) {
       return true;
     }

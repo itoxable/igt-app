@@ -1,9 +1,9 @@
-
 <ActionBar title="Edit {{product.name}}">
   <NavigationButton text="Go Back" (tap)="goHome()" android.systemIcon="ic_menu_close_clear_cancel"></NavigationButton>
+  <ActionItem (tap)="save()" text="Save" android.position="actionBar"></ActionItem>
 </ActionBar>
 
-<ScrollView orientation="vertical">
+<ScrollView orientation="vertical" *ngIf="product">
   <StackLayout  class="p-10">
 
     <StackLayout class="m-b-15">

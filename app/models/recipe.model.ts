@@ -3,6 +3,7 @@ import { IProduct } from './product.model';
 export interface IRecipe  {
   recipeProduct?: any[];
   directions?: string;
+  products?: IProduct[];
   id?: string;
   name?: string;
   image?: string;

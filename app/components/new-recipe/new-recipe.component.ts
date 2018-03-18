@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NavigationService } from '../../services/navigation.service';
 import { ProductService } from '../../services/product.service';
@@ -13,6 +12,8 @@ import { layout } from 'tns-core-modules/utils/utils';
 import * as app from 'tns-core-modules/application';
 import { isAndroid } from 'tns-core-modules/platform';
 import * as imagepicker from 'nativescript-imagepicker';
+
+
 @Component({
   selector: 'igt-new-recipe',
   templateUrl: 'components/new-recipe/new-recipe.component.html'
@@ -21,92 +22,80 @@ import * as imagepicker from 'nativescript-imagepicker';
 export class NewRecipeComponent implements OnInit {
 
   errorMessage: string;
-  recipe: IRecipe;
+  recipe: IRecipe = {
+    products: []
+  };
+  product: IProduct = {};
 
   public saveToGallery = false;
-  public cameraImage: ImageAsset;
-  items = [];
 
   constructor(private navigationService: NavigationService,
     private changeDetectionRef: ChangeDetectorRef,
     private productService: ProductService, private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.recipe = {};
   }
 
   save() {
     this.recipeService.saveRecipe(this.recipe).subscribe((data) => {
       this.recipe = data;
-      this.navigationService.go([`/secure/home`]);
+      this.navigationService.back();
     }, err => {
       console.dir(err);
       this.errorMessage = 'error!';
     });
   }
 
-  goHome() {
-    this.navigationService.go([`/secure/home`]);
+  addProduct() {
+    this.recipe.products.push(this.product);
+    this.product = {};
   }
 
-  onTakePictureTap(args) {
-    requestPermissions().then(
-        () => {
-            takePicture({ width: 300, height: 300, keepAspectRatio: true, saveToGallery: this.saveToGallery })
-                .then((imageAsset: any) => {
-                    this.cameraImage = imageAsset;
-                    // console.dir(src);
-                    // if you need image source
-                    console.dir(this.cameraImage);
-                    const source = new ImageSource();
-                    source.fromAsset(imageAsset).then((imageSource: ImageSource) => {
-                        let width = imageSource.width;
-                        let height = imageSource.height;
-                        if (app.android) {
-                          // src.android
-                            // the android dimensions are in device pixels
-                            width = layout.toDeviceIndependentPixels(width);
-                            height = layout.toDeviceIndependentPixels(height);
-                        }
+  removeProduct(i) {
+    this.recipe.products.splice(i, 1);
+  }
 
-                        console.dir(imageSource);
-                    });
-                }, (error) => {
-                    console.log('Error: ' + error);
-                });
-        },
-        () => alert('permissions rejected')
+  goHome() {
+    this.navigationService.back();
+  }
+
+
+  onTakePictureTap(args) {
+    requestPermissions().then(() => {
+      takePicture({ width: 300, height: 300, keepAspectRatio: true, saveToGallery: this.saveToGallery })
+        .then(this.setImage.bind(this), (error) => {
+            console.log('Error: ' + error);
+        });
+      },
+      () => alert('permissions rejected')
     );
   }
 
   selectImages() {
     const context = imagepicker.create({
-      mode: 'multiple'
+      mode: 'single'
     });
     this.startSelection(context);
   }
 
   startSelection(context) {
     const _that = this;
-
-    context.authorize()
-    .then(() => {
-        _that.items = [];
-        return context.present();
+    context.authorize().then(() => {
+      return context.present();
     })
-    .then((selection) => {
-        console.log('Selection done:');
-        selection.forEach(function (selected) {
-            console.log('----------------');
-            console.log('uri: ' + selected.uri);
-            console.log('fileUri: ' + selected.fileUri);
-        });
-        _that.items = selection;
-        console.dir(_that.items[0]);
-        _that.changeDetectionRef.detectChanges();
-    }).catch(function (e) {
+    .then(this.setImage.bind(this))
+    .catch(function (e) {
         console.log(e);
     });
-}
+  }
+
+  setImage(image) {
+    if (image.constructor === Array && image.length) {
+      image = image[0];
+    }
+    console.log('*******************');
+    console.dir(image);
+    this.recipe.image = image.android;
+  }
 
 }

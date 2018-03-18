@@ -16,36 +16,18 @@ import { AppService } from '../../services/app.service';
 
 export class HomeComponent implements OnInit {
 
-  myProductsArray: IProduct[];
   myRecipesArray: IRecipe[] = [];
   featuredRecipesArray: IRecipe[] = [];
 
-  constructor(private productService: ProductService, private appService: AppService,
+  constructor(private appService: AppService,
     private recipeService: RecipeService, private navigationService: NavigationService) { }
 
   ngOnInit() {
-    this.appService.startLoader();
-    this.getMyProducts();
-
     this.recipeService.getMyRecipes().subscribe(recipes => {
       this.myRecipesArray = recipes;
     });
     this.recipeService.getFeaturedRecipes().subscribe(recipes => {
       this.featuredRecipesArray = recipes;
-    });
-  }
-
-  refreshProducts() {
-    this.getMyProducts();
-  }
-
-
-  getMyProducts() {
-    this.appService.startLoader();
-    this.productService.getMyProducts().finally(() => this.appService.hideLoader()).delay(2000).subscribe((products: IProduct[]) => {
-      this.myProductsArray = products;
-    }, err => {
-      this.myProductsArray = [];
     });
   }
 

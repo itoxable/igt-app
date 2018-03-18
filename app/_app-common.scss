@@ -4,6 +4,15 @@
 $googleColor: #db4437;
 $facebookColor: #4267b2;
 
+Actionbar {
+  border-width: 1;
+  border-color: transparent;
+}
+
+TabView {
+  // background-color: aqua;
+}
+
 .login {
   margin: 0;
   &.google {
@@ -18,10 +27,11 @@ $facebookColor: #4267b2;
 
 .fontawesome-icons {
   font-family: 'fontawesome-webfont';
+  font-size: 26;
 }
 .material-icons {
   font-family: "MaterialIcons-Regular";
-  font-size: 36;
+  font-size: 26;
 }
 
 .page {
@@ -34,10 +44,19 @@ $facebookColor: #4267b2;
 }
 
 .product {
-  color: #111;
   border-left-color: orange; 
   border-left-width: 5; 
   background-color: #EEE;
+  .name {
+    color: #111;
+  }
+}
+
+.ingridient{
+  background-color: #EEE;
+  &.even {
+    background-color: #DDD;
+  }
 }
 
 .input-label {
@@ -58,4 +77,9 @@ $facebookColor: #4267b2;
   color: #111;
   border-bottom-color: #EEE; 
   border-bottom-width: 1; 
+}
+
+.fab-button {
+  width: 55;
+  height: 55;
 }

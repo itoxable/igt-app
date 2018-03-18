@@ -1,0 +1,9 @@
+<igt-new-product class="m-10" (productSave)="refreshProducts()"></igt-new-product>
+<GridLayout *ngIf="myProductsArray?.length">
+  <RadListView [items]="myProductsArray">
+    <ng-template tkListItemTemplate let-item="item">
+      <igt-product (removed)="refreshProducts()" [product]="item" class="m-b-10"></igt-product>
+    </ng-template>
+    <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"  spanCount="1"></ListViewGridLayout>
+  </RadListView>
+</GridLayout>
