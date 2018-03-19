@@ -13,7 +13,7 @@
   </StackLayout>
 
   <StackLayout *tabItem="{title: 'My Recipes'}">
-      <Button text="Add Recipe" (tap)="addRecipe()" class="btn btn-primary"></Button>
+    <Button text="Add Recipe" (tap)="addRecipe()" class="btn btn-primary"></Button>
 
     <GridLayout >
       <RadListView [items]="myRecipesArray" row="*">

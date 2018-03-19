@@ -23,12 +23,13 @@ export class HomeComponent implements OnInit {
     private recipeService: RecipeService, private navigationService: NavigationService) { }
 
   ngOnInit() {
-    this.recipeService.getMyRecipes().subscribe(recipes => {
-      this.myRecipesArray = recipes;
-    });
-    this.recipeService.getFeaturedRecipes().subscribe(recipes => {
-      this.featuredRecipesArray = recipes;
-    });
+    // this.recipeService.getMyRecipes().subscribe(recipes => {
+    //   console.dir(recipes);
+    //   this.myRecipesArray = recipes;
+    // });
+    // this.recipeService.getFeaturedRecipes().subscribe(recipes => {
+    //   this.featuredRecipesArray = recipes;
+    // });
   }
 
   openSearch() {

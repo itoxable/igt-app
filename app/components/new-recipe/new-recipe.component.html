@@ -22,7 +22,7 @@
       <Label text="Ingridients" class="input-label m-10"></Label>
       
       <GridLayout columns="*, 70, 40" class="m-10">
-        <TextField class="input-text" col="0"  hint="Add item" [(ngModel)]="product.name"></TextField>
+        <TextField class="input-text" col="0"  hint="Name" [(ngModel)]="product.name"></TextField>
         <TextField class="input-text" col="1" marginLeft="5" hint="Quant" [(ngModel)]="product.quantity"></TextField>
         <Label text="{{'0xE876' | font}}" col="2" (tap)="addProduct()" class="material-icons" horizontalAlignment="center"  verticalAlignment="center"></Label>
       </GridLayout>
@@ -44,8 +44,24 @@
       <TextField required hint="Description" [(ngModel)]="recipe.description"></TextField>
     </StackLayout>
 
-    <Label  class="m-y-20 m-x-10" text="Nutritional info"></Label>
-    <StackLayout class="m-10">
+
+    <StackLayout>
+      <Label text="Nutritional info" class="input-label m-10"></Label>
+      
+      <GridLayout columns="*, 70, 40" class="m-10">
+        <TextField class="input-text" col="0"  hint="Name" [(ngModel)]="macro.name"></TextField>
+        <TextField class="input-text" col="1" marginLeft="5" hint="Quant" [(ngModel)]="macro.value"></TextField>
+        <Label text="{{'0xE876' | font}}" col="2" (tap)="addMacro()" class="material-icons" horizontalAlignment="center"  verticalAlignment="center"></Label>
+      </GridLayout>
+
+      <GridLayout columns="40, 40, *" verticalAlignment="center" class="p-y-15 p-x-5 ingridient" [class.even]="ev" *ngFor="let info of recipe.nutritionalInfo; index as i; even as ev">
+        <Label col="0" text="{{'0xE15C' | font}}"  class="material-icons" (tap)="removeMacro(i)" verticalAlignment="center"></Label>
+        <Label col="1" [text]="info.value" verticalAlignment="center"></Label>
+        <Label col="2" [text]="info.name" verticalAlignment="center"></Label>
+      </GridLayout>
+    </StackLayout>
+
+    <!-- <StackLayout class="m-10">
       <StackLayout class="m-y-10">
         <Label text="Calories" class="input-label m-0"></Label>
         <TextField required hint="Calories" [(ngModel)]="recipe.calories"></TextField>
@@ -80,7 +96,7 @@
         <Label text="Vitamins" class="input-label m-0"></Label>
         <TextField required hint="Vitamins" [(ngModel)]="recipe.vitamins"></TextField>
       </StackLayout>
-    </StackLayout>
+    </StackLayout> -->
     <StackLayout class="m-10">
       <Label *ngIf="errorMessage" class="c-ruby text-center" [text]="errorMessage"></Label>
       <Button text="Save" (tap)="save()" class="btn btn-primary"></Button>

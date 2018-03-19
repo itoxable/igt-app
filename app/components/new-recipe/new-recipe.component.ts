@@ -4,7 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../models/product.model';
 import { Page } from 'tns-core-modules/ui/page';
 import { RecipeService } from '../../services/recipe.service';
-import { IRecipe } from '../../models/recipe.model';
+import { IRecipe, INutritionalInfo } from '../../models/recipe.model';
 import { takePicture, requestPermissions } from 'nativescript-camera';
 import { ImageAsset } from 'tns-core-modules/image-asset/image-asset';
 import { ImageSource } from 'tns-core-modules/image-source';
@@ -12,6 +12,7 @@ import { layout } from 'tns-core-modules/utils/utils';
 import * as app from 'tns-core-modules/application';
 import { isAndroid } from 'tns-core-modules/platform';
 import * as imagepicker from 'nativescript-imagepicker';
+import { LoadingIndicator } from 'nativescript-loading-indicator';
 
 
 @Component({
@@ -23,11 +24,13 @@ export class NewRecipeComponent implements OnInit {
 
   errorMessage: string;
   recipe: IRecipe = {
-    products: []
+    products: [],
+    nutritionalInfo: []
   };
   product: IProduct = {};
-
+  macro: INutritionalInfo = {};
   public saveToGallery = false;
+  loadingIndicator: LoadingIndicator = new LoadingIndicator();
 
   constructor(private navigationService: NavigationService,
     private changeDetectionRef: ChangeDetectorRef,
@@ -37,9 +40,14 @@ export class NewRecipeComponent implements OnInit {
   }
 
   save() {
-    this.recipeService.saveRecipe(this.recipe).subscribe((data) => {
+    this.loadingIndicator.show({
+      message: 'Saving Recipe'
+    });
+    this.recipeService.saveRecipe(this.recipe)
+    .finally(() => this.loadingIndicator.hide())
+    .subscribe((data) => {
       this.recipe = data;
-      this.navigationService.back();
+      // this.navigationService.back();
     }, err => {
       console.dir(err);
       this.errorMessage = 'error!';
@@ -53,6 +61,15 @@ export class NewRecipeComponent implements OnInit {
 
   removeProduct(i) {
     this.recipe.products.splice(i, 1);
+  }
+
+  addMacro() {
+    this.recipe.nutritionalInfo.push(this.macro);
+    this.macro = {};
+  }
+
+  removeMacro(i) {
+    this.recipe.nutritionalInfo.splice(i, 1);
   }
 
   goHome() {

@@ -16,4 +16,11 @@ export interface IRecipe  {
   transFat?: string;
   vitamins?: string;
   quantity?: number;
+  nutritionalInfo?: INutritionalInfo[];
+}
+
+export interface INutritionalInfo  {
+  name?: string;
+  description?: string;
+  value?: string;
 }

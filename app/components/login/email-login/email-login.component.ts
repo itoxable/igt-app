@@ -20,11 +20,9 @@ export class EmailLoginComponent implements OnInit {
   public login() {
     this.errorMessage = null;
     this.authService.login(this.email, this.password).subscribe((user) => {
-      this.navigationService.go(['/secure/home']);
+      this.navigationService.go(['/secure/home'], true);
     }, (err) => {
-      console.log('========================');
       this.errorMessage = 'wrong email';
-      console.log(err);
     });
   }
 
