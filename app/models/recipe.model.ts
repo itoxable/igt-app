@@ -1,22 +1,16 @@
 import { IProduct } from './product.model';
 
 export interface IRecipe  {
-  recipeProduct?: any[];
-  directions?: string;
-  products?: IProduct[];
   id?: string;
   name?: string;
+  directions?: string;
   image?: string;
   description?: string;
-  calories?: string;
-  carbs?: string;
-  unsaturatedFat?: string;
-  saturatedFat?: string;
-  polyunsaturatedFat?: string;
-  transFat?: string;
-  vitamins?: string;
-  quantity?: number;
+  preparationTime?: number;
+  servings?: number;
+  products?: IProduct[];
   nutritionalInfo?: INutritionalInfo[];
+  likes?: any[];
 }
 
 export interface INutritionalInfo  {

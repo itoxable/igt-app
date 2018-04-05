@@ -1,0 +1,17 @@
+
+<StackLayout>
+  <AbsoluteLayout height="210" class="recipe-top" [backgroundImage]="recipe.image? recipe.image : 'res://default_recipe'">
+    <GridLayout columns="*,*,*" left="0" top="0" style="border-color: #000; border-width: 1;">
+      <Label [text]="recipe.recipeProduct.length"></Label>
+      <Label [text]="recipe.preparationTime"></Label>
+      <Label [text]="recipe.servings"></Label>
+    </GridLayout>
+
+    <StackLayout top="150">
+      <Label [text]="recipe.name" class="title"></Label>
+      <Label [text]="'by: ' + recipe.name" class="title"></Label>
+    </StackLayout>
+  </AbsoluteLayout>
+
+
+</StackLayout>

@@ -6,7 +6,7 @@
     <ActionItem (tap)="openSearch()" ios.systemIcon="9" ios.position="right" android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
 </ActionBar>
 
-<TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" sdkToggleNavButton>
+<TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" tabBackgroundColor="#31bcff" android:androidSelectedTabHighlightColor="#455b66">
   
   <StackLayout *tabItem="{title: 'My Fridge'}">
     <igt-products></igt-products>
@@ -36,3 +36,60 @@
     </GridLayout>
   </StackLayout>
 </TabView>
+<!-- <ActionBar title="">
+  <ActionItem (tap)="openSearch()"
+  ios.systemIcon="9" ios.position="right"
+  android.systemIcon="ic_menu_agenda" android.position="actionBar"></ActionItem>
+  <ActionItem (tap)="openSearch()" ios.systemIcon="9" ios.position="right" android.systemIcon="ic_menu_search" android.position="actionBar"></ActionItem>
+</ActionBar> -->
+
+<RadSideDrawer [showOverNavigation]="true" tkToggleNavButton>
+  <StackLayout tkDrawerContent class="sideStackLayout">
+    <StackLayout class="sideTitleStackLayout">
+      <Label text="Navigation Menu"></Label>
+    </StackLayout>
+    <StackLayout class="sideStackLayout">
+      <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
+      <Label text="Social" class="sideLabel"></Label>
+      <Label text="Promotions" class="sideLabel"></Label>
+      <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
+      <Label text="Important" class="sideLabel"></Label>
+      <Label text="Starred" class="sideLabel"></Label>
+      <Label text="Sent Mail" class="sideLabel"></Label>
+      <Label text="Drafts" class="sideLabel"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <!-- <StackLayout tkMainContent>
+    <TabView class="p-10" selectedIndex="0"  (selectedIndexChange)="onIndexChanged($event)" tabBackgroundColor="#31bcff" android:androidSelectedTabHighlightColor="#455b66">
+      
+      <StackLayout *tabItem="{title: 'My Fridge'}">
+        <igt-products></igt-products>
+      </StackLayout>
+    
+      <StackLayout *tabItem="{title: 'My Recipes'}">
+        <Button text="Add Recipe" (tap)="addRecipe()" class="btn btn-primary"></Button>
+    
+        <GridLayout >
+          <RadListView [items]="myRecipesArray" row="*">
+            <ng-template tkListItemTemplate let-item="item">
+              <igt-recipe class="m-5" [recipe]="item"></igt-recipe>
+            </ng-template>
+            <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"></ListViewGridLayout>
+          </RadListView>
+        </GridLayout>
+      </StackLayout>
+    
+      <StackLayout *tabItem="{title: 'Fearured Recipes'}">
+        <GridLayout>
+          <RadListView [items]="featuredRecipesArray">
+            <ng-template tkListItemTemplate let-item="item">
+              <igt-recipe [recipe]="item"></igt-recipe>
+            </ng-template>
+            <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"></ListViewGridLayout>
+          </RadListView>
+        </GridLayout>
+      </StackLayout>
+    </TabView>
+  </StackLayout> -->
+</RadSideDrawer>

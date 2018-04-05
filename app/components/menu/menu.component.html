@@ -1,0 +1,51 @@
+<!-- 
+<drawer:RadSideDrawer
+xmlns="http://www.nativescript.org/tns.xsd"
+xmlns:drawer="nativescript-pro-ui/sidedrawer"
+id="example-menu-drawer"
+drawerLocation="Bottom"
+loaded="drawerLoaded"
+drawerClosed="drawerClosed"
+ios:drawerContentSize="104"
+android:drawerContentSize="104">
+<drawer:RadSideDrawer.drawerContent>
+<GridLayout class="example-menu-background" backgroundColor="white">
+    <StackLayout class="example-menu-stack">
+        <Button text="Example information" class="example-menu-item" tap="informationTap" />
+        <Button text="View code" class="example-menu-item" tap="codeTap" />
+    </StackLayout>
+</GridLayout>
+</drawer:RadSideDrawer.drawerContent>
+</drawer:RadSideDrawer> -->
+
+
+<RadSideDrawer [drawerLocation]="'Bottom'" >
+  <!-- << angular-sidedrawer-location -->
+  <StackLayout tkDrawerContent class="sideStackLayout">
+      <StackLayout class="sideTitleStackLayout">
+          <Label text="Navigation Menu"></Label>
+      </StackLayout>
+      <ScrollView>
+          <StackLayout class="sideStackLayout">
+              <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
+              <Label text="Social" class="sideLabel"></Label>
+              <Label text="Promotions" class="sideLabel"></Label>
+              <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
+              <Label text="Important" class="sideLabel"></Label>
+              <Label text="Starred" class="sideLabel"></Label>
+              <Label text="Sent Mail" class="sideLabel"></Label>
+              <Label text="Drafts" class="sideLabel"></Label>
+              <Button text="Close Drawer" (tap)="onCloseDrawerTap()"></Button>
+          </StackLayout>
+      </ScrollView>
+  </StackLayout>
+  <StackLayout class="mainContent">
+      <ScrollView>
+          <StackLayout>
+              <Label text="SideDrawer for NativeScript is shown from the left side of the app window by default.You can change this behavior by setting the drawerLocation property to Left, Top, Right or Bottom."
+          textWrap="true" class="drawerContentText"></Label>
+              <Button text="Left" class="drawerContentButton"></Button>
+          </StackLayout>
+        </ScrollView>
+  </StackLayout>
+</RadSideDrawer>

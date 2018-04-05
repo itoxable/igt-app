@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ApiErrorComponent } from './components/api-error/api-error.component';
 import { NewRecipeComponent } from './components/new-recipe/new-recipe.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'product-details/:id', component:  ProductDetailsComponent },
       { path: 'new-recipe', component: NewRecipeComponent },
-      { path: 'recipe/:id', component: NewRecipeComponent},
+      { path: 'recipe/:id', component: RecipeDetailsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },

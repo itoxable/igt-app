@@ -48,6 +48,10 @@ import { AppService } from './services/app.service';
 import { FontPipe } from './pipes/font.pipe';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductsComponent } from './components/products/products.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { NativeScriptUISideDrawerModule } from 'nativescript-pro-ui/sidedrawer/angular';
+import { NativeScriptUIDataFormModule } from 'nativescript-pro-ui/dataform/angular/dataform-directives';
+import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 
 application.on(application.launchEvent, function (args) {
   nsFacebook.init('2074423572770618');
@@ -68,7 +72,9 @@ application.on(application.launchEvent, function (args) {
       NativeScriptFormsModule,
       NativeScriptUIListViewModule,
       AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      NativeScriptUISideDrawerModule,
+      NativeScriptUIDataFormModule
     ],
     declarations: [
       AppComponent,
@@ -87,7 +93,9 @@ application.on(application.launchEvent, function (args) {
       NewProductComponent,
       NewRecipeComponent,
       ProductDetailsComponent,
-      FontPipe
+      FontPipe,
+      MenuComponent,
+      RecipeDetailsComponent
     ],
     providers: [
     //  { provide: APP_INITIALIZER, useFactory: initializer, deps: [AuthService], multi: true },
